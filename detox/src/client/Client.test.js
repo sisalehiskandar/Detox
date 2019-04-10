@@ -40,7 +40,7 @@ describe('Client', () => {
     }
   });
 
-  it(`reloadReactNative() - should throw if receives wrong response from device`, async () => {
+  it(`sendAction() - should log and throw if the client ignored the message`, async () => {
     await connect();
     client.ws.send.mockRejectedValueOnce(new DetoxClientTimeoutError({ json: {}, timeout: 100 }));
 
