@@ -1,6 +1,6 @@
 {
-  "setupFilesAfterEnv": ["./init.js"],
-  "testEnvironment": "node",
-  "reporters": ["detox/runners/jest/DetoxJestReporter"],
-  "verbose": true
+    "reporters": ["detox/runners/jest/reporter"],
+    "setupFilesAfterEnv": ["./init.js"],
+    "testEnvironment": "node",
+    "verbose": true
 }

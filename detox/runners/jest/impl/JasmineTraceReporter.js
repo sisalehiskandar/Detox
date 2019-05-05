@@ -1,8 +1,15 @@
+/* istanbul ignore file */
+
 const chalk = require('chalk').default;
 
-class DetoxTraceAdapter /* implements JasmineReporter */ {
-
-  constructor() {
+/***
+ * @implements Reporter (jest-jasmine2)
+ */
+class JasmineTraceReporter {
+  constructor({
+    stream = process.stdout
+  } = {}) {
+    this._stream = stream;
     this._suites = [];
     this._suitesDesc = '';
   }
@@ -53,14 +60,9 @@ class DetoxTraceAdapter /* implements JasmineReporter */ {
     this._traceln(this._suitesDesc + chalk.gray(description) + chalk.gray(status ? ` [${status}]` : ''));
   }
 
-  _trace(message) {
-    process.stdout.write(message);
-  }
-
   _traceln(message) {
-    this._trace(message);
-    process.stdout.write('\n');
+    this._stream.write(message + '\n');
   }
 }
 
-module.exports = DetoxTraceAdapter;
+module.exports = JasmineTraceReporter;

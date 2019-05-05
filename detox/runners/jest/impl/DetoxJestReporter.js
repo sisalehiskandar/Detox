@@ -1,5 +1,7 @@
+/* istanbul ignore file */
+
 const {VerboseReporter} = require('@jest/reporters'); // eslint-disable-line
-const DetoxRuntimeError = require('../../src/errors/DetoxRuntimeError');
+const DetoxRuntimeError = require('../../../src/errors/DetoxRuntimeError');
 
 class DetoxJestReporter extends VerboseReporter {
 

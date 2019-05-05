@@ -68,6 +68,7 @@
     "roots": [
       "node_modules",
       "src",
+      "runners",
       "local-cli"
     ],
     "testPathIgnorePatterns": [

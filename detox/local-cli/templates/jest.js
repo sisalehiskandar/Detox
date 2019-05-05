@@ -1,27 +1,22 @@
 const firstTestContent = require('./firstTestContent');
 const runnerConfig = `{
+    "reporters": ["detox/runners/jest/reporter"],
     "setupFilesAfterEnv": ["./init.js"],
     "testEnvironment": "node",
-    "reporters": ["detox/runners/jest/DetoxJestReporter.js"],
     "verbose": true
 }
 `;
 
-const initjsContent = `const config = require('../package.json').detox;
-const adapter = require('detox/runners/jest/adapter');
-const traceAdapter = require('detox/runners/jest/traceAdapter');
+const initjsContent = `const detox = require('detox');
+const config = require('../package.json').detox;
+const adapter = require('detox/runners/jest/adapter').trace(true);
 
 // Set the default timeout
 jest.setTimeout(120000);
 jasmine.getEnv().addReporter(adapter);
 
-// This takes care of generating status logs on a per-test basis.
-// By default, jest only reports at file-level.
-// This is strictly optional.
-jasmine.getEnv().addReporter(traceAdapter);
-
 beforeAll(async () => {
-  await adapter.beforeAll(config);
+  await detox.init(config);
 });
 
 beforeEach(async () => {
@@ -30,6 +25,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await adapter.afterAll();
+  await detox.cleanup();
 });
 `;
 
