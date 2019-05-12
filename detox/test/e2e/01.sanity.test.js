@@ -1,3 +1,5 @@
+const { by, device, element, expect } = require('detox'); // testing explicit require
+
 describe('Sanity', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
